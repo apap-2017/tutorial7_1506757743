@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:include="fragments/fragment :: header">
+        <title id="title">View All Students</title>
+    </head>
+    <body>
+        <h1>All Students</h1>
+
+        <table width="100%" class="table table-striped table-bordered" id="example">
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>NPM</th>
+                    <th>Nama</th>
+                    <th>GPA</th>
+                    <th>Cum Laude</th>
+                    <th>Delete</th>
+                    <th>Update</th>    
+                </tr>
+            </thead>
+            <tbody>
+                <div th:each="student,iterationStatus: ${students}">
+                    <tr>
+                        <td th:text="${iterationStatus.count}"></td>
+                        <td th:text="${student.npm}"></td>
+                        <td th:text="${student.name}"></td>
+                        <td th:text="${student.gpa}"></td>
+                        <td th:text="${student.gpa >= 3.49}? 'Iya' : 'Tidak' "></td>
+                        <td><a th:href="'/student/delete/' + ${student.npm}">Delete Data</a></td>
+                        <td><a th:href="'/student/update/' + ${student.npm}">Update Data</a></td>
+                    </tr>
+                </div>
+            </tbody>
+        </table>
+        
+       	<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+        <div th:replace="fragments/fragment :: footer"></div>
+    </body>
+</html>
